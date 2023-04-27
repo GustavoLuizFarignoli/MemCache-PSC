@@ -32,6 +32,10 @@ def mapeamento_direto(tamanho_cache, pos_memoria, hit=0, miss=0):
             cache[x] = pos_memoria[i]
         imprimir_cache(cache)
         time.sleep(10) #Pausa de alguns segundos para que o usuário possa acompanhar o processo
+    print(f"- Total de posições de memórias acessadas: {len(pos_memoria)}")
+    print(f"- Total de Hits: {hit}")
+    print(f"- Total de Misses: {miss}")
+    print(f"- Total de acerto: {(hit/len(pos_memoria)) * 100}%")
 
 
 tam, mem = usefull.menu_direto();

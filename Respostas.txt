@@ -1,0 +1,19 @@
+5a.1
+A taxa de acerto foi de 12.5% (totalizando 1 hit e 7 misses).
+Foram realizadas apenas duas trocas, uma no bloco 0 em que o 5 entrou no lugar do 0 e no bloco 1 em que o 6 entrou no lugar do 1, isso ocorreu pois como o tamanho da 
+cache é 5 temos blocos de 0 a 4 valores acima de 4 recomeçamos a contar como se fosse do 0 por isso o 5 corresponde a 0 (5%5 = 0) e 6 corresponde a 1 (6%5 é 1).
+
+5a.2
+A taxa de acerto foi de aproximadamente 15.4% (totalizando 2 hits e 11 misses).
+Foram realizadas 7 trocas, podemos dizer que tamanho da cache é um "ciclo" então como nesse exemplo a cache era de tamanho cinco podemos dizer que a cada 5 números (partindo do zero) se tem um novo
+ciclo, por isso houveram varias trocas pois 2,12,22,32,42 etc... são o mesmo indice desse ciclo, porém estão em ciclos diferentes por exemplo o 12 seria o indice 2 do quarto do ciclo enquanto o 42 é
+do decimo ciclo, o mesmo se aplica para 0,10 e 20 e 1 e 11
+
+5b
+A taxa de acerto foi de 0%.
+Isso acontece pois apenas um dos endereços da cache, uma vez que como explicado anteriormente sobre a questão do "ciclo", estamos acessando varios espaços de memória que possuem o mesmo indice dentro de seus respectivos ciclos
+e dessa forma concorrem por um mesmo espaço e por este motivo temos uma taxa de acerto nula.
+
+5c
+sendo uma desvantagem em um caso como esse em que mesmo tendo espaços livres na cache perdemos tempo fazendo trocas sem necessidade
+
