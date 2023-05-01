@@ -38,5 +38,5 @@ def mapeamento_direto(tamanho_cache, pos_memoria, hit=0, miss=0):
     print(f"- Total de acerto: {(hit/len(pos_memoria)) * 100}%")
 
 
-tam, mem = usefull.menu_direto();
-mapeamento_direto(tam,mem)
+#tam, mem = usefull.menu_direto();
+#mapeamento_direto(tam,mem)
