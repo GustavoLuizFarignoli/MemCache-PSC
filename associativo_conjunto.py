@@ -1,4 +1,4 @@
-import usefull
+from usefull import menu_assocon
 from direto import mapeamento_direto
 import time
 import math
@@ -28,15 +28,30 @@ def imprimir_cache(cache):
                     print(f"      {i}       |      {cache[i][j][k]}       ")
             print("-" * 32)
 
-def mapeamento_associativoconjunto(tamanho_cache, blocos, palavras, pos_memoria, hit=0, miss=0):
-    washit = False
+def mapeamento_associativoconjunto(tamanho_cache, blocos, palavras, pos_memoria):
     if (blocos == 1):
         mapeamento_direto(tamanho_cache,pos_memoria)
         return
     cache = inicializar_cache(tamanho_cache,blocos,palavras)
     print(f"Tamanho da cache {tamanho_cache}") 
     imprimir_cache(cache)
-    time.sleep(10)
+    print("Escolha a técnina de substituição:" + "\n-Lifo\n-Fifo\n-LRU")
+    tec = input("->")
+    print(tec.lower())
+    if(tec.lower() == "lifo"):
+        hit, miss = lifo(tamanho_cache, palavras, pos_memoria, cache)
+    elif(tec.lower() == "fifo"):
+        hit, miss = fifo(tamanho_cache, palavras, pos_memoria, cache)
+    elif(tec.lower() == "lru"):
+        hit, miss = lru(tamanho_cache, palavras, pos_memoria, cache)
+    print(f"- Total de posições de memórias acessadas: {len(pos_memoria)}")
+    print(f"- Total de Hits: {hit}")
+    print(f"- Total de Misses: {miss}")
+    print(f"- Total de acerto: {math.floor((hit/len(pos_memoria)) * 100)}%")
+
+
+def lifo(tamanho_cache, palavras, pos_memoria, cache, hit=0, miss=0):
+    washit = False
     for i in range (len(pos_memoria)): # LIFO
         print(f"Linha {i} | Posição da memória requisitada: {pos_memoria[i]}")
         x = math.floor((pos_memoria[i] / palavras) % tamanho_cache) #descobrindo o número do conjunto
@@ -66,12 +81,71 @@ def mapeamento_associativoconjunto(tamanho_cache, blocos, palavras, pos_memoria,
         washit = False
         imprimir_cache(cache)
         time.sleep(10) #Pausa de alguns segundos para que o usuário possa acompanhar o processo
-    print(f"- Total de posições de memórias acessadas: {len(pos_memoria)}")
-    print(f"- Total de Hits: {hit}")
-    print(f"- Total de Misses: {miss}")
-    print(f"- Total de acerto: {(hit/len(pos_memoria)) * 100}%")
+    return hit, miss
+
+def fifo(tamanho_cache, palavras, pos_memoria, cache, hit=0, miss=0):
+    washit = False
+    for i in range (len(pos_memoria)): # LIFO
+        print(f"Linha {i} | Posição da memória requisitada: {pos_memoria[i]}")
+        x = math.floor((pos_memoria[i] / palavras) % tamanho_cache) #descobrindo o número do conjunto
+        for j in range (len(cache[x])):
+            if (pos_memoria[i] in cache[x][j]):
+                print("Status: Hit")
+                hit += 1
+                washit = True
+                break
+        if (washit == False):
+            saved = False
+            print("Status: Miss")
+            miss += 1
+            for j in range (len(cache[x])):
+                if (-1 in cache[x][j]):
+                    if ((pos_memoria[i] % 2) ==  0):
+                        cache[x][j] = [pos_memoria[i],pos_memoria[i]+1]
+                    else:
+                        cache[x][j] = [pos_memoria[i]-1,pos_memoria[i]]
+                    saved = True
+                    break
+            if (saved is False):
+                cache[x].pop(0)
+                if ((pos_memoria[i] % 2) ==  0):
+                    cache[x].append([pos_memoria[i],pos_memoria[i]+1])
+                else:
+                    cache[x].append([pos_memoria[i]-1,pos_memoria[i]])             
+        washit = False
+        imprimir_cache(cache)
+        time.sleep(10) #Pausa de alguns segundos para que o usuário possa acompanhar o processo
+    return hit, miss
+
+def lru(tamanho_cache, palavras, pos_memoria, cache, hit=0, miss=0):
+    washit = False
+    mru = []
+    for i in range (len(pos_memoria)): # LIFO
+        print(f"Linha {i} | Posição da memória requisitada: {pos_memoria[i]}")
+        x = math.floor((pos_memoria[i] / palavras) % tamanho_cache) #descobrindo o número do conjunto
+        for j in range (len(cache[x])):
+            if (pos_memoria[i] in cache[x][j]):
+                print("Status: Hit")
+                hit += 1
+                washit = True
+                mru = cache[x][j]
+                cache[x].remove(mru)
+                cache[x].append(mru)
+                break
+        if (washit == False):
+            print("Status: Miss")
+            miss += 1
+            cache[x].pop(0)
+            if ((pos_memoria[i] % 2) ==  0):
+                cache[x].append([pos_memoria[i],pos_memoria[i]+1])
+            else:
+                cache[x].append([pos_memoria[i]-1,pos_memoria[i]])             
+        washit = False
+        imprimir_cache(cache)
+        time.sleep(10) #Pausa de alguns segundos para que o usuário possa acompanhar o processo
+    return hit, miss
 
 
-tam, bloco, palavras, pos = usefull.menu_assocon()
+
+tam, bloco, palavras, pos = menu_assocon()
 mapeamento_associativoconjunto(tam, bloco, palavras, pos)
-#print(math.floor((1 / 2) % 2))

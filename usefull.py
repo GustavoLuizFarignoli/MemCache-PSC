@@ -46,14 +46,17 @@ def menu_assocon():
         except ValueError:
             print("Por favor, digite um valor válido")
             continue
-    print("Agora, digite quantas palavras terão no bloco")
-    while True:
-        try:
-            palavras = int(input("->"))
-            break
-        except ValueError:
-            print("Por favor, digite um valor válido")
-            continue
+    if (blocos > 1):
+        print("Agora, digite quantas palavras terão no bloco")
+        while True:
+            try:
+                palavras = int(input("->"))
+                break
+            except ValueError:
+                print("Por favor, digite um valor válido")
+                continue
+    else:
+        palavras = 1;
     print("Agora, digite a lista de posições a serem acessadas. Caso deseje sair digite -1")
     pos_memoria = []
     while True:
