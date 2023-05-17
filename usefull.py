@@ -47,14 +47,16 @@ def menu_assocon():
             print("Por favor, digite um valor válido")
             continue
     if (blocos > 1):
-        print("Agora, digite quantas palavras terão no bloco")
-        while True:
-            try:
-                palavras = int(input("->"))
-                break
-            except ValueError:
-                print("Por favor, digite um valor válido")
-                continue
+        #blocos com tamanho diferente de 2 infelizmente não estão funcionando 
+        #print("Agora, digite quantas palavras terão no bloco")
+        #while True:
+            #try:
+                #palavras = int(input("->"))
+                #break
+            #except ValueError:
+                #print("Por favor, digite um valor válido")
+                #continue
+        palavras = 2;
     else:
         palavras = 1;
     print("Agora, digite a lista de posições a serem acessadas. Caso deseje sair digite -1")

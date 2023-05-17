@@ -176,9 +176,9 @@ def lfu(tamanho_cache, blocos, palavras, pos_memoria, cache, hit=0, miss=0):
                     leastused = l
             lfu[x][leastused] = 1
             if ((pos_memoria[i] % 2) ==  0):
-                cache[x][leastused]= [pos_memoria[i],pos_memoria[i]+1]
+                cache[x][leastused] = [pos_memoria[i],pos_memoria[i]+1]
             else:
-                cache[x][leastused] [pos_memoria[i]-1,pos_memoria[i]]           
+                cache[x][leastused] = [pos_memoria[i]-1,pos_memoria[i]]           
         washit = False
         imprimir_cache(cache)
         print(lfu)
