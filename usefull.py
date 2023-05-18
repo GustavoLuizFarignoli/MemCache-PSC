@@ -1,5 +1,5 @@
 def menu_direto ():
-    print("Performance em Sistemas Ciberfísicos - Gustavo Luiz")
+    print("Performance em Sistemas Ciberfísicos - Gustavo Luiz, Vittorio e Gabriel Molec")
     print("*" + ("-"*30) + "*")
     print("Primeiramente, digite o tamanho da mémoria cache")
     while True:
@@ -28,7 +28,7 @@ def menu_direto ():
 
 def menu_assocon():
     print("Associativo")
-    print("Performance em Sistemas Ciberfísicos - Gustavo Luiz")
+    print("Performance em Sistemas Ciberfísicos - Gustavo Luiz, Vittorio e Gabriel Molec")
     print("*" + ("-"*30) + "*")
     print("Primeiramente, digite quantidade de conjuntos na mémoria cache")
     while True:
